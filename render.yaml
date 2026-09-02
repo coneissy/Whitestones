@@ -1,0 +1,21 @@
+services:
+  - type: worker
+    name: whitestones-bot
+    runtime: python
+    region: frankfurt
+    buildCommand: python -m pip install --upgrade pip && python -m pip install .
+    startCommand: python -m app.main
+    maxShutdownDelaySeconds: 30
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: WHITESTONES_ENV
+        value: production
+      - key: DATABASE_URL
+        value: sqlite:///whitestones.db
+      - key: HUBSPOT_ENABLED
+        value: "false"
+      - key: DEFAULT_LANGUAGE
+        value: en
+      - key: DEFAULT_COUNTRY
+        value: LB
