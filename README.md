@@ -11,9 +11,25 @@ WhiteStones is a modular Telegram bot foundation for opportunity discovery, coun
 - `app/localization/` — language normalization and localization entry points.
 - `app/models/` — domain models.
 - `app/services/` — business logic for opportunities, referrals, and future monetization services.
+- `assets/banners/` — premium, reusable WhiteStones campaign artwork in SVG format.
 - `tests/` — unit and integration coverage.
 
 The architecture deliberately keeps Telegram handlers separate from storage and external providers so individual services can be replaced without rewriting the bot.
+
+## Banner collection
+
+The redesigned campaign set is intentionally consistent: dark premium background, WhiteStones cyan accent, short calls-to-action, and qualification/availability language instead of unsupported guarantees.
+
+- `01-hero.svg` — master brand / opportunity discovery
+- `02-model-opportunities.svg` — model opportunities
+- `03-affiliate.svg` — affiliate program
+- `04-vip.svg` — VIP membership
+- `05-platforms.svg` — platform connections
+- `06-payments.svg` — payouts and payment methods
+- `07-whitelabel.svg` — white-label partners
+- `08-markets.svg` — global markets, including Afghanistan
+
+These are SVG source assets so the same artwork can be reused at multiple sizes without quality loss.
 
 ## Development
 
@@ -24,6 +40,12 @@ The architecture deliberately keeps Telegram handlers separate from storage and 
 5. Set `TELEGRAM_BOT_TOKEN` before starting the bot with `python -m app.main`.
 
 Never commit `.env` or production credentials.
+
+## Render deployment
+
+`render.yaml` defines WhiteStones as a Render background worker using Telegram long polling. In Render, create a Blueprint from this repository and set the secret environment variable `TELEGRAM_BOT_TOKEN`. Do not put the bot token in GitHub, `render.yaml`, or any committed file.
+
+The worker starts with `python -m app.main` and installs the package with `pip install -e .`.
 
 ## Configuration
 
