@@ -1,0 +1,1 @@
+"""WhiteStones application package."""
