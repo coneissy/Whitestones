@@ -1,6 +1,11 @@
 from unittest.mock import Mock
 
-from app.bot.handlers.payments import SERVICE_PAYLOAD, SERVICE_TITLE, build_premium_report, stars_price
+from app.bot.handlers.payments import (
+    SERVICE_PAYLOAD,
+    SERVICE_TITLE,
+    build_premium_report,
+    stars_price,
+)
 from app.config.settings import Settings
 
 
