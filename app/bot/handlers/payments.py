@@ -1,5 +1,7 @@
 """Telegram Stars payment handlers for digital services."""
 
+import logging
+
 from aiogram import Router
 from aiogram.filters import Command
 from aiogram.types import LabeledPrice, Message, PreCheckoutQuery
@@ -7,6 +9,7 @@ from aiogram.types import LabeledPrice, Message, PreCheckoutQuery
 from app.config.settings import Settings
 
 router = Router(name="payments")
+logger = logging.getLogger(__name__)
 
 SERVICE_TITLE = "WhiteStones Premium Opportunity Report"
 SERVICE_DESCRIPTION = "A premium WhiteStones opportunity starter report delivered in Telegram."
@@ -78,10 +81,13 @@ async def successful_payment(message: Message) -> None:
         return
 
     # Keep the charge identifier in structured logs for reconciliation/refunds.
-    router.logger.info(
+    logger.info(
         "WhiteStones Stars payment received: user_id=%s charge_id=%s amount=%s",
         message.from_user.id if message.from_user else None,
         payment.telegram_payment_charge_id,
         payment.total_amount,
     )
-    await message.answer("⭐ Payment received! Your Premium Opportunity Report is ready:\n\n" + build_premium_report(message))
+    await message.answer(
+        "⭐ Payment received! Your Premium Opportunity Report is ready:\n\n"
+        + build_premium_report(message)
+    )
