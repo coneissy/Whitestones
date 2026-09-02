@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-test = ["pytest>=8,<9"]
+test = ["pytest>=8,<10"]
 lint = ["ruff>=0.6,<1"]
 
 [tool.pytest.ini_options]
