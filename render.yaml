@@ -1,9 +1,11 @@
 services:
-  - type: worker
+  - type: web
     name: whitestones-bot
     runtime: python
+    plan: free
     buildCommand: pip install -e .
     startCommand: python -m app.main
+    healthCheckPath: /healthz
     envVars:
       - key: TELEGRAM_BOT_TOKEN
         sync: false
