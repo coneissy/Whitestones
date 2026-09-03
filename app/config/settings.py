@@ -8,6 +8,7 @@ from dataclasses import dataclass
 class Settings:
     environment: str = "development"
     telegram_token: str | None = None
+    telegram_test_mode: bool = False
     database_url: str = "sqlite:///whitestones.db"
     hubspot_enabled: bool = False
     default_language: str = "en"
@@ -26,6 +27,7 @@ class Settings:
         return cls(
             environment=os.getenv("WHITESTONES_ENV", "development"),
             telegram_token=os.getenv("TELEGRAM_BOT_TOKEN"),
+            telegram_test_mode=os.getenv("TELEGRAM_TEST_MODE", "false").lower() == "true",
             database_url=os.getenv("DATABASE_URL", "sqlite:///whitestones.db"),
             hubspot_enabled=os.getenv("HUBSPOT_ENABLED", "false").lower() == "true",
             default_language=os.getenv("DEFAULT_LANGUAGE", "en"),
